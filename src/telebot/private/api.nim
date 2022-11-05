@@ -4,7 +4,7 @@ import types, keyboard
 
 proc sendMessage*(b: TeleBot, chatId: int64, text: string, parseMode = "", entities: seq[MessageEntity] = @[],
                   disableWebPagePreview = false, disableNotification = false, protectContent = false, replyToMessageId = 0,
-                  allowSendingWithoutReply = false, replyMarkup: KeyboardMarkup = nil): Future[Message] {.async.} =
+                  allowSendingWithoutReply = false, replyMarkup: KeyboardMarkup = nil, threadId: int = -1): Future[Message] {.async.} =
   var data = newMultipartData()
 
   data["chat_id"] = $chatId
@@ -27,6 +27,8 @@ proc sendMessage*(b: TeleBot, chatId: int64, text: string, parseMode = "", entit
     data["allow_sending_without_reply"] = "true"
   if replyMarkup != nil:
     data["reply_markup"] = $replyMarkup
+  if threadId != -1:
+    data["message_thread_id"] = $threadId
 
   let res = await makeRequest(b, procName, data)
   result = getMessage(res)

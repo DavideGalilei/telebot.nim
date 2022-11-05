@@ -383,6 +383,7 @@ type
     videoChatParticipantsInvited*: Option[VoiceChatParticipantsInvited]
     webAppData*: Option[WebAppData]
     replyMarkup*: Option[InlineKeyboardMarkup]
+    messageThreadId*: Option[int]
 
   MessageId* = object of TelegramObject
     messageId*: int
