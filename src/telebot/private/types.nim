@@ -384,6 +384,7 @@ type
     webAppData*: Option[WebAppData]
     replyMarkup*: Option[InlineKeyboardMarkup]
     messageThreadId*: Option[int]
+    isTopicMessage*: Option[bool]
 
   MessageId* = object of TelegramObject
     messageId*: int
